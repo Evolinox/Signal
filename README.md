@@ -37,10 +37,10 @@ The script simulates an automated sequence featuring randomized aspect selection
 | Function | Pin | Description |
 | :--- | :--- | :--- |
 | **RED 1** | Pin 2 | First red light (Hp0 / Sh1) |
-| **RED 2** | Pin 3 | Second red light (Hp0) |
+| **RED 2** | Pin 3 | Second red light (Hp00) |
 | **GREEN** | Pin 4 | Green light (Hp1 / Hp2) |
 | **YELLOW** | Pin 5 | Yellow light (Hp2) |
-| **WHITE** | Pin 6 | White light (Sh1 - Shunting signal) |
+| **WHITE** | Pin 6 | White light (Sh1) |
 
 #### Distant Signal (VR)
 | Function | Pin | Description |
@@ -50,7 +50,8 @@ The script simulates an automated sequence featuring randomized aspect selection
 | **GREEN 1** | Pin 9 | Green light 1 |
 | **GREEN 2** | Pin 10 | Green light 2 |
 
-*Note: Analog pin A0 is left floating/unconnected to provide random noise for `randomSeed()`.*
+> [!NOTE]
+> Analog pin A0 is left floating/unconnected to provide random noise for `randomSeed()`.
 
 ---
 
@@ -59,4 +60,18 @@ The script simulates an automated sequence featuring randomized aspect selection
 1. **Clone or download the repository:**
    
 ```bash
-   git clone [https://github.com/Evolinox/Signal.git](https://github.com/Evolinox/Signal.git)
+   git clone https://github.com/Evolinox/Signal.git
+```
+
+2. **In Arduino IDE, upload the script to your Arduino board.**
+
+3. **Wire everything up and power the Arduino board.**
+
+## Disclaimer
+
+This project is provided "as is", without warranty of any kind.
+
+> [!WARNING]
+> Please double-check your wiring and ensure that appropriate current-limiting resistors are connected to each LED before connecting power.
+> The author of this repository takes no responsibility or liability for any damage to hardware, burnt out LEDs, microcontrollers, or any other equipment resulting from improper wiring, incorrect voltage levels, or faulty assembly.
+> Proceed at your own risk.
