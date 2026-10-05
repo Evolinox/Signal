@@ -12,12 +12,14 @@ const int PIN_VR_GRUEN1 = 9;
 const int PIN_VR_GRUEN2 = 10;
 
 // Vars
-const unsigned long FAHRT_DAUER  = 4UL * 60UL * 1000UL; // 4 Minuten auf Fahrt / Rangieren
-const unsigned long HALT_DAUER   = 30UL * 1000UL;        // 30 Sekunden Aufenthalt/Halt
+const unsigned long FAHRT_DAUER   = 8UL * 60UL * 1000UL;  // 8 Minuten auf Fahrt
+const unsigned long RANGIER_DAUER = 20UL * 1000UL;        // 20 Sekunden Rangiersignal
+const unsigned long HALT_DAUER    = 3UL * 30UL * 1000UL;  // 3 Minuten Zugfolge
 
 enum SignalState {
   HALT,
-  FAHRT
+  FAHRT,
+  RANGIEREN
 };
 
 SignalState currentSignalState = HALT;
@@ -53,23 +55,33 @@ void loop() {
 
         switch (currentProceedSignal) {
           case 0:
+            currentSignalState = FAHRT;
             setHp1();
             break;
           case 1:
+            currentSignalState = FAHRT;
             setHp2();
             break;
           case 2:
+            currentSignalState = RANGIEREN;
             setSh1();
             break;
         }
 
-        currentSignalState = FAHRT;
         begin = now;
       }
       break;
 
     case FAHRT:
       if (now - begin >= FAHRT_DAUER) {
+        setHp0();
+        currentSignalState = HALT;
+        begin = now;
+      }
+      break;
+
+    case RANGIEREN:
+      if (now - begin >= RANGIER_DAUER) {
         setHp0();
         currentSignalState = HALT;
         begin = now;
